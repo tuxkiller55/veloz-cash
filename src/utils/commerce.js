@@ -2,7 +2,8 @@ import { whatsappContacts } from '../data/site.js';
 
 export const productTerms = [13, 26, 39];
 export const monthlyInterestRate = 0.16;
-export const weeksPerMonth = 4.33;
+export const billingWeeksPerMonth = 4;
+export const weeklyInterestRate = monthlyInterestRate / billingWeeksPerMonth;
 
 export function formatMoney(value) {
   return new Intl.NumberFormat('es-MX', {
@@ -17,14 +18,30 @@ export function displayProductPrice(product) {
 }
 
 export function calculateProductQuote(product, downPaymentPercent, selectedTerm) {
-  const downPayment = Math.round(product.price * (downPaymentPercent / 100));
-  const financedAmount = product.price - downPayment;
-  const months = selectedTerm / weeksPerMonth;
-  const totalFinanced = financedAmount * (1 + monthlyInterestRate * months);
-  const weeklyPayment = Math.ceil(totalFinanced / selectedTerm);
+  const downPayment = calculateDownPayment(product.price, downPaymentPercent);
+  const financedAmount = calculateFinancedAmount(product.price, downPayment);
+  const interest = calculateWeeklyInterest(financedAmount, selectedTerm);
+  const totalFinanced = financedAmount + interest;
+  const weeklyPayment = calculateWeeklyPayment(totalFinanced, selectedTerm);
   const totalToPay = downPayment + weeklyPayment * selectedTerm;
 
-  return { downPayment, financedAmount, weeklyPayment, totalToPay };
+  return { downPayment, financedAmount, interest, weeklyPayment, totalToPay };
+}
+
+export function calculateDownPayment(price, downPaymentPercent) {
+  return Math.round(price * (downPaymentPercent / 100));
+}
+
+export function calculateFinancedAmount(price, downPayment) {
+  return price - downPayment;
+}
+
+export function calculateWeeklyInterest(financedAmount, termWeeks) {
+  return financedAmount * weeklyInterestRate * termWeeks;
+}
+
+export function calculateWeeklyPayment(totalFinanced, termWeeks) {
+  return Math.ceil(totalFinanced / termWeeks);
 }
 
 export function whatsappLink(phone, message) {
