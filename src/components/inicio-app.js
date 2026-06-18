@@ -15,7 +15,7 @@ class InicioApp extends LitElement {
           <h1>Estrena hoy, paga con calma.</h1>
           <p class="hero-copy">
             VelozCash combina creditos personalizados, celulares y bicicletas electricas con pagos claros,
-            atencion humana y cotizaciones rapidas por WhatsApp.
+            atencion personalizada y cotizaciones rapidas por WhatsApp.
           </p>
 
           <div class="actions">
