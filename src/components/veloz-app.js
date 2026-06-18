@@ -83,7 +83,7 @@ class VelozApp extends LitElement {
         <div class="container">
           <div>
             <h2>VelozCash, siempre al alcance de tu mano.</h2>
-            <p>Creditos personalizados, celulares y movilidad con una experiencia clara y humana.</p>
+            <p>Creditos personalizados, celulares y movilidad con una experiencia clara y personalizada.</p>
           </div>
           <div class="actions">
             ${renderWhatsappAnchors(html, defaultWhatsappMessage, 'yellow')}
