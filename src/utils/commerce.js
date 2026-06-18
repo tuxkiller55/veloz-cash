@@ -44,6 +44,26 @@ export function calculateWeeklyPayment(totalFinanced, termWeeks) {
   return Math.ceil(totalFinanced / termWeeks);
 }
 
+export function calculateBikeQuote(product, termWeeks) {
+  const plan = product.financing?.plans?.[termWeeks];
+
+  if (!plan) {
+    throw new Error(`No existe un plan de ${termWeeks} semanas para ${product.name}.`);
+  }
+
+  const downPayment = product.financing.downPayment;
+  const weeklyPayment = plan.weeklyPayment;
+  const financedAmount = weeklyPayment * termWeeks;
+  const totalToPay = downPayment + financedAmount;
+
+  return {
+    downPayment,
+    financedAmount,
+    weeklyPayment,
+    totalToPay,
+  };
+}
+
 export function whatsappLink(phone, message) {
   return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
 }
