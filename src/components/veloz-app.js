@@ -98,7 +98,7 @@ class VelozApp extends LitElement {
       <footer>
         <div class="container footer-content">
           <span><img src=${markUrl} alt="" width="26" height="26" /> VelozCash</span>
-          <span>Propuesta visual rojo + amarillo</span>
+          <span></span>
         </div>
       </footer>
     `;
