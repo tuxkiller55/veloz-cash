@@ -145,6 +145,15 @@ class CelularesApp extends LitElement {
         </article>
 
         <aside class="calculator">
+          <div class="quote-guide">
+            <h4>Personaliza tu financiamiento</h4>
+            <ol>
+              <li>Elige cuanto deseas dar de enganche hoy.</li>
+              <li>Selecciona el plazo que mas te convenga.</li>
+              <li>Da clic en el bot&oacute;n Whatsapp para iniciar tu tramite.</li>
+            </ol>
+            <p>Los pagos mostrados son semanales.</p>
+          </div>
           <h3>Cotiza aqui</h3>
           <div class="result-stack">
             <div class="result-row">
@@ -189,7 +198,7 @@ class CelularesApp extends LitElement {
           </div>
 
           <p class="note">Cotizacion informativa sujeta a disponibilidad, validacion y condiciones firmadas.</p>
-          <div class="actions">${renderWhatsappAnchors(html, this.productWhatsappMessage(product), 'primary')}</div>
+          <div class="actions">${renderWhatsappAnchors(html, this.productWhatsappMessage(product, quote), 'primary')}</div>
         </aside>
       </section>
     `;
@@ -284,8 +293,19 @@ class CelularesApp extends LitElement {
     return batteryFilters[total % batteryFilters.length];
   }
 
-  productWhatsappMessage(product) {
-    return `Hola VelozCash, quiero cotizar ${product.name} de ${displayProductPrice(product)}.`;
+  productWhatsappMessage(product, quote) {
+    return [
+      'Hola VelozCash, quiero comenzar el tramite para este equipo.',
+      '',
+      `Equipo: ${product.name}`,
+      `Precio: ${displayProductPrice(product)}`,
+      `Enganche: ${formatMoney(quote.downPayment)} (${this.downPaymentPercent}%)`,
+      `Plazo: ${this.selectedTerm} semanas`,
+      `Pago semanal: ${formatMoney(quote.weeklyPayment)}`,
+      `Total estimado: ${formatMoney(quote.totalToPay)}`,
+      '',
+      'Me pueden indicar como comenzar el tramite?',
+    ].join('\n');
   }
 }
 

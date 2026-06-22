@@ -563,6 +563,62 @@ export const sharedStyles = css`
       text-align: center;
     }
 
+    .quote-guide {
+      margin-bottom: 1.35rem;
+      border: 1px solid rgba(216, 44, 44, 0.12);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 197, 48, 0.18), rgba(255, 255, 255, 0.82));
+      padding: 1rem;
+    }
+
+    .quote-guide h4 {
+      margin: 0 0 0.75rem;
+      color: var(--color-red);
+      font-family: var(--font-title);
+      font-size: 1.08rem;
+      letter-spacing: 0;
+    }
+
+    .quote-guide ol {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: quoteSteps;
+    }
+
+    .quote-guide li {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 0.6rem;
+      align-items: center;
+      color: rgba(32, 18, 18, 0.76);
+      font-weight: 800;
+      line-height: 1.35;
+      counter-increment: quoteSteps;
+    }
+
+    .quote-guide li::before {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--color-red);
+      color: white;
+      content: counter(quoteSteps);
+      font-size: 0.9rem;
+      font-weight: 950;
+    }
+
+    .quote-guide p {
+      margin: 0.75rem 0 0;
+      color: rgba(32, 18, 18, 0.68);
+      font-size: 0.92rem;
+      font-weight: 850;
+    }
+
     .result-stack {
       display: grid;
       gap: 0.75rem;
